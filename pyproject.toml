@@ -1,0 +1,15 @@
+[project]
+name = "buan-profile"
+version = "0.1.0"
+description = "Computes a distance-weighted mean scalar profile along a bundle using the BUAN weighted-mean method"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "dipy>=1.11.0",
+    "nibabel>=5.4.2",
+    "numpy>=2.4.3",
+    "scipy>=1.17.1",
+]
+
+[project.scripts]
+buan-profile = "buan_profile:main"
