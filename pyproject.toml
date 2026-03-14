@@ -12,4 +12,4 @@ dependencies = [
 ]
 
 [project.scripts]
-buan-profile = "buan_profile:main"
+buan_profile = "buan_profile:main"

@@ -6,59 +6,6 @@ Computes a distance-weighted mean scalar profile along a bundle using the BUAN w
 Outputs a CSV with one row per along-tract segment. Multiple scalar maps can be processed in a single 
 call, each writing its own output CSV, with a single optional mask applied to all maps.
 
-REQUIRED PACKAGES
------------
-numpy, scipy, nibabel, dipy
-
-PIPELINE STEPS
---------------
-Step 1 — Load and resample bundle pairs. Three bundle files are required per subject: --rec_bundle 
-(subject bundle registered to atlas/MNI space), --org_bundle (same bundle in native space), and 
---ref_bundle (the atlas reference bundle). Before any spatial computation, org_bundle and rec_bundle
-are resampled via prepare_bundle_pairs() so that each corresponding streamline has the same number of 
-evenly-spaced points. rec_bundle and org_bundle must have the same number of streamlines in matching order.
-
-Step 2 — Compute the atlas centroid. compute_centroid() runs QuickBundles on ref_bundle to obtain an 
-initial centroid, then optionally extends it beyond its natural endpoints via --robust_method. The 
-standard QB centroid represents the mean trajectory of the bundle, and may cause terminal segments to span 
-a disproportionately large anatomical extent. The robust linear extension (default) projects the terminal 
-tangent vectors outward and trims to the 2nd-98th percentile of streamline endpoint projections. The spline
-method fits a cubic parametric curve through the QB centroid and evaluates it outside [0, 1], less stable 
-for short or strongly curved endpoints.
-
-Step 3 — Assign segments. assign_segments() queries every point in rec_bundle against the centroid via a 
-KD-tree, returning a segment index and a Euclidean distance for each point. Distances are later used as 
-inverse weights in the BUAN mean. In segment-length mode (--s_len), terminal bins whose point count falls 
-below 0.2 x median are merged into their neighbor, preventing near-empty edge segments from producing 
-unreliable means. When --ns is set, no merging is performed and the output always has exactly ns rows.
-
-Step 4 — Interpolate scalar values and apply mask. buan_profile() calls values_from_volume to trilinearly 
-interpolate the scalar map at all org_bundle point coordinates. If --mask is provided, masking is applied 
-after interpolation: each point's world coordinate is mapped to the nearest voxel in the mask volume and 
-points outside the mask are excluded. Post-interpolation masking avoids the boundary artefacts that arise 
-when zeros or NaNs are inserted into the scalar map before interpolation. A single mask is loaded once and 
-applied to all scalar maps in the same call.
-
-Step 5 — Compute per-segment mean and coverage volume. For each segment, valid (unmasked, non-NaN) points 
-are used to compute the BUAN weighted mean, where each point's scalar value is weighted by the inverse of 
-its distance to the nearest centroid point. point_volume() computes the convex hull of the valid points, 
-and returns a volume estimate per segment (mm^3). Each scalar map writes an CSV with these columns: 
-segment (1-based), mean, valid_point_count, volume_mm3. 
-
-NOTES ON VALIDITY CHECKS
---------------
-Three categories of checks are applied during profiling. 
-1. Bundles with fewer than --min_lines streamlines (default 20) are skipped entirely.
-2. Dring atlas parameterization, terminal segments whose point count falls below 0.2 x median are merged 
-into their neighbor to prevent near-empty edge segments from producing unreliable means. This applies
-only in --s_len mode and is suppressed when --ns is set. 
-3. During profiling, individual streamline points are excluded if their interpolated scalar value is NaN, 
-if they fall outside the --mask volume, or if they fall in a masked (zero) voxel.
-4. When profiles are used in group analysis, we recommend users to employ additional group level validity
-check to avoid making inferences in segments with poor coverage across subjects:
-    1) thresholding the number of valid point per segment;
-    2) thresholding the number of subjects with sufficients points or valid value per segment.
-
 USAGE NOTES
 -----------
 1. SEGMENT COUNT vs SEGMENT LENGTH
