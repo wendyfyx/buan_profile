@@ -12,8 +12,8 @@ Along-tract scalar profile extraction for white matter tractometry using the BUA
 
 ```bash
 git clone https://github.com/wendyfyx/buan_profile.git
-cd buan-profile
-uv sync
+cd buan_profile
+uv pip install -e .
 ```
 
 To verify:
