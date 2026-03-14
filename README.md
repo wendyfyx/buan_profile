@@ -5,7 +5,7 @@ Along-tract scalar profile extraction for white matter tractometry using the BUA
 ## Requirements
 
 - Python 3.10+
-- numpy, scipy, nibabel, dipy, scikit-learn
+- numpy, scipy, nibabel, dipy
 - uv (recommended for environment management)
 
 ## Installation
@@ -16,10 +16,15 @@ cd buan_profile
 uv pip install -e .
 ```
 
-To verify:
+To verify and run:
 
 ```bash
 uv run buan_profile --help
+```
+or
+```bash
+source .venv/bin/activate
+buan_profile --help
 ```
 
 ## Usage
