@@ -19,7 +19,7 @@ USAGE NOTES
 
 EXAMPLE
 -------
-  python tpa_profile_1d.py \\
+  python buan_profile.py \\
       --rec_bundle sub01_AF_L_mni.trk \\
       --org_bundle sub01_AF_L_native.trk \\
       --ref_bundle atlas_AF_L.trk \\
@@ -227,10 +227,8 @@ def compute_centroid(
     Compute the atlas bundle centroid with optional robust endpoint extension.
 
     When robust_method is 'linear' or 'spline', the QB centroid is extended
-    beyond its natural endpoints to cover the full arc-length extent of the
-    bundle's streamline endpoints (2nd-98th percentile projection). This
-    avoids large terminal segments caused by the QB centroid being shorter
-    than the longest streamlines in the bundle.
+    beyond its natural endpoints. This avoids large terminal segments caused 
+    by the QB centroid being shorter than the longer streamlines in the bundle.
 
     Parameters
     ----------
@@ -376,10 +374,8 @@ def prepare_bundle_pairs(
     Resample org_bundle and rec_bundle so that each corresponding streamline
     has the same number of evenly-distributed points.
 
-    Both bundles must have the same number of streamlines in matching order
-    (i.e. the output of bundle registration). Point counts are taken from
-    org_bundle; rec_bundle is resampled to match, preserving the one-to-one
-    correspondence needed for segment assignment and scalar sampling.
+    Both bundles must have the same number of streamlines in matching order.
+    Point counts are taken from org_bundle; rec_bundle is resampled to match.
 
     Parameters
     ----------
@@ -413,10 +409,6 @@ def prepare_bundle_pairs(
 def point_volume(points: np.ndarray) -> float:
     """
     Estimate the spatial volume (mm^3) of a point cloud via convex hull.
-
-    Returns 0.0 when the point cloud is degenerate (fewer than 4 points, or
-    all points are coplanar/colinear), which can occur in terminal segments
-    with poor coverage.
 
     Parameters
     ----------
