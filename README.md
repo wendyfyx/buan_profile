@@ -1,6 +1,6 @@
 # buan_profile
 
-Along-tract scalar profile extraction for white matter tractometry using the BUAN distance-weighted mean method.
+Along-tract scalar profile extraction for white matter tractometry using the BUndle ANalytics (BUAN) distance-weighted mean method.
  
 ## Requirements
 
@@ -97,3 +97,11 @@ and returns a volume estimate per segment (mm^3). Each scalar map writes an CSV 
 5. **Empty segment guard** — segments with no valid points receive `mean=NaN` and `volume_mm3=0.0`, and are identifiable via `valid_point_count=0`.
 
 For group analysis we recommend additional subject-level checks before making inferences: (1) thresholding `valid_point_count` per segment to exclude segments with insufficient coverage in individual subjects; (2) thresholding the number of subjects with sufficient valid points per segment before including that segment in group-level statistics.
+
+## Citation: 
+
+If you use this repository in your research, please cite:
+
+1. Chandio, B.Q., Risacher, S.L., Pestilli, F., Bullock, D., Yeh, F.C., Koudoro, S., Rokem, A., Harezlak, J. and Garyfallidis, E., 2020. Bundle analytics, a computational framework for investigating the shapes and profiles of brain pathways across populations. Scientific Reports, 10(1), p.17149. 
+
+2. Chandio, B.Q., Villalon-Reina, J.E., Nir, T.M., Thomopoulos, S.I., Feng, Y., Benavidez, S., Jahanshad, N., Harezlak, J., Garyfallidis, E. and Thompson, P.M., 2024, July. Bundle analytics based data harmonization for multi-site diffusion MRI tractometry. In 2024, the 46th annual international conference of the IEEE Engineering in Medicine and Biology Society (EMBC) (pp. 1-7). IEEE.
