@@ -102,6 +102,6 @@ For group analysis we recommend additional subject-level checks before making in
 
 If you use this repository in your research, please cite:
 
-1. Chandio, B.Q., Risacher, S.L., Pestilli, F., Bullock, D., Yeh, F.C., Koudoro, S., Rokem, A., Harezlak, J. and Garyfallidis, E., 2020. Bundle analytics, a computational framework for investigating the shapes and profiles of brain pathways across populations. Scientific Reports, 10(1), p.17149. 
+1. Chandio, B.Q., Risacher, S.L., Pestilli, F., Bullock, D., Yeh, F.C., Koudoro, S., Rokem, A., Harezlak, J. and Garyfallidis, E., 2020. Bundle analytics, a computational framework for investigating the shapes and profiles of brain pathways across populations. Scientific Reports, 10(1), p.17149. URL: https://doi.org/10.1038/s41598-020-74054-4.
 
-2. Chandio, B.Q., Villalon-Reina, J.E., Nir, T.M., Thomopoulos, S.I., Feng, Y., Benavidez, S., Jahanshad, N., Harezlak, J., Garyfallidis, E. and Thompson, P.M., 2024, July. Bundle analytics based data harmonization for multi-site diffusion MRI tractometry. In 2024, the 46th annual international conference of the IEEE Engineering in Medicine and Biology Society (EMBC) (pp. 1-7). IEEE.
+2. Chandio, B.Q., Villalon-Reina, J.E., Nir, T.M., Thomopoulos, S.I., Feng, Y., Benavidez, S., Jahanshad, N., Harezlak, J., Garyfallidis, E. and Thompson, P.M., 2024, July. Bundle analytics based data harmonization for multi-site diffusion MRI tractometry. In 2024, the 46th annual international conference of the IEEE Engineering in Medicine and Biology Society (EMBC) (pp. 1-7). IEEE. URL: https://doi.org/10.1109/EMBC53108.2024.10782419.
