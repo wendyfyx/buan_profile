@@ -30,7 +30,7 @@ buan_profile --help
 ## Usage
 
 ```bash
-buan-profile \
+buan_profile \
     --rec_bundle sub01_AF_L_mni.trk \
     --org_bundle sub01_AF_L_native.trk \
     --ref_bundle atlas_AF_L.trk \
